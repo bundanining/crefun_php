@@ -25,15 +25,15 @@
           <form role="form" action="index.php/user/user_account" method="post">
             <fieldset>
 			  <div class="form-group">
-                <input class="form-control" placeholder="NAME" name="user_name" type="text" autofocus="" value="">
-              </div>
-              <div class="form-group">
+              <input class="form-control" placeholder="NAME" name="user_name" type="text" autofocus="" value="">
+            </div>
+            <div class="form-group">
                 <input class="form-control" placeholder="USER ID" name="user_id" type="text" value="">
-              </div>
-              <div class="form-group">
-                <input class="form-control" placeholder="Password" name="user_pw" type="password" value="">
-              </div>
-              <button type="submit" class="btn btn-primary">회원가입</button>
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="PASSWORD" name="user_pw" type="password" value="">
+            </div>
+            <button type="submit" class="btn btn-primary">회원가입</button>
             </fieldset>
           </form>
         </div>

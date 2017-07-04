@@ -28,12 +28,12 @@
                 <input class="form-control" placeholder="USER ID" name="user_id" type="text" autofocus="" value="">
               </div>
               <div class="form-group">
-                <input class="form-control" placeholder="Password" name="user_pw" type="password" value="">
+                <input class="form-control" placeholder="PASSWORD" name="user_pw" type="password" value="">
               </div>
               <button type="submit" class="btn btn-primary">Login</button>
             </fieldset>
           </form>
-          <a href="index.php/user/join">qwe</a>
+          <a href="index.php/user/join">회원가입</a>
         </div>
       </div>
     </div><!-- /.col-->

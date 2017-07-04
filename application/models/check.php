@@ -7,7 +7,7 @@ class User_check extends CI_Model {
         parent::__construct();
     }
 
-    function get_result($table = 'login') {
+    function get_result($table = 'user_data') {
         $id = $this->input->post('user_id');
         $pw = $this->input->post('user_pw');
         $sql = "SELECT `user_id`, `user_pw` FROM ".$table." WHERE `user_id`=`".$id."` AND `user_pw`= `".$pw."` ";
@@ -30,5 +30,11 @@ class User_check extends CI_Model {
         // }
         return $result;
     }
-
+    function input_user() {
+      $name = $this->input->post('user_name');
+      $id = $this->input->post('user_id');
+      $pw = $this->input->post('user_pw');
+      $sql = "INSERT INTO user_data (user_name, user_id, user_pw) VALUES(`".$name."`,`".$id."`,`".$pw."`)";
+      $this-> db -> query($sql);
+    }
 }
