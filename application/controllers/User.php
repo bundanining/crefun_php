@@ -21,9 +21,10 @@ class User extends CI_Controller {
 	}
 	public function account()
 	{
-		$this->load->database();
-		$this->load->model('account');
-		$this->account->input_user();
+		$this-> load ->database();
+		$this-> load ->model('account');
+		$this-> user_check ->input_user();
+		$this->load->view('login');
 	}
 }
 ?>
