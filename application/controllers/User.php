@@ -5,16 +5,24 @@ class User extends CI_Controller {
 	function __construct() {
 			parent::__construct();
 			$this->load->database();
+			$this->load->helper('url');
 		}
 	// index 페이지 라우팅
 	public function index()
   {
-  	$this->load->view('login');
+		// $currentSession = $this -> session;
+		// // user_id 정보가 없는 경우는 접속 안한 것으로 간주함
+		// if (!$currentSession->userdata['logged_in']){
+		// 	$this->load->view('login');
+		// } else {
+		// 	redirect('board');
+		// }
+			$this->load->view('login');
   }
 	//로그인 후 임시페이지
 	public function main()
 	{
-		$this->load->view('login_success');
+		redirect('board', 'refresh');
 	}
 	// 아이디 중복 검사
 	public function check_page() {
@@ -57,14 +65,18 @@ class User extends CI_Controller {
 			echo true;
 		}
 		else {
-			// $this->load->view('login');
 			echo false;
 		}
 	}
 	public function account()
 	{
 		$this->load->model('user_m');
-		$res = $this->user_m->input_user();
+		$input_data = array(
+			'name' => $this->input->post('user_name'),
+			'id' => $this->input->post('user_id'),
+			'pw' => $this->input->post('user_pw')
+		);
+		$res = $this->user_m->input_user($input_data);
 		if($res == true){
 			$this->load->view('account_success');
 		}

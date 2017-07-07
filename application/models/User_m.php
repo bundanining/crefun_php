@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User_model extends CI_Model {
+class User_m extends CI_Model {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
@@ -29,15 +29,12 @@ class User_model extends CI_Model {
       else
         return false;
     }
-    function input_user() {
-        $name = $this->input->post('user_name');
-        $id = $this->input->post('user_id');
-        $pw = $this->input->post('user_pw');
-        $hash_pw = password_hash($pw,PASSWORD_DEFAULT);
-        if($this->user_model->check_user($id)){
+    function input_user($input_data) {
+        $hash_pw = password_hash($input_data['pw'],PASSWORD_DEFAULT);
+        if($this->user_m->check_user($input_data[id])){
           return false;
         } else {
-          $sql = "INSERT INTO user_data (`user_name`, `user_id`, `user_pw`) VALUES('$name','$id','$hash_pw')";
+          $sql = "INSERT INTO user_data (`user_name`, `user_id`, `user_pw`) VALUES('".$input_data['name']."','".$input_data['id']."','$hash_pw')";
           $this-> db -> query($sql);
           return true;
         }
