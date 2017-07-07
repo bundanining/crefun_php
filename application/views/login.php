@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Login</title>
+<title>PAGE</title>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -12,48 +12,68 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<!-- <link href="css/styles.css" rel="stylesheet"> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 </head>
-
 <body>
   <div class="container">
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
       <div class="login-panel panel panel-default">
         <div class="panel-heading">LOGIN</div>
         <div class="panel-body">
-          <form role="form" action="index.php/user/user_check" method="post">
+          <form id="form1" role="form" action="index.php/user/main" method="post" onsubmit="return false">
             <fieldset>
               <div class="form-group">
-                <input class="form-control" placeholder="USER ID" name="user_id" type="text" autofocus="" value="">
+                <input class="form-control" placeholder="USER ID" id="user_id" type="text" autofocus="" value="">
               </div>
               <div class="form-group">
-                <input class="form-control" placeholder="PASSWORD" name="user_pw" type="password" value="">
+                <input class="form-control" placeholder="PASSWORD" id="user_pw" type="password" value="">
               </div>
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button id="submit" class="btn btn-primary">Login</button>
             </fieldset>
           </form>
           <a href="index.php/user/join">회원가입</a>
+          <a href="index.php/user/main">게시판으로 가기</a>
         </div>
+        <div id="message"></div>
       </div>
     </div><!-- /.col-->
   </div><!-- /.row -->
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script>
-    !function ($) {
-      $(document).on("click","ul.nav li.parent > a > span.icon", function(){
-        $(this).find('em:first').toggleClass("glyphicon-minus");
+<?php $this->load->view('script'); ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+          $('#submit').click(function(){
+              //빈칸 있는지 확인
+              if($('#user_id').val() == "") {
+                alert("아이디를 입력하세요.");
+                $('#user_id').focus();
+              } else if($('#user_pw').val() == "") {
+                alert("패스워드를 입력하세요.");
+                $('#user_pw').focus();
+              }
+            });
+          });
+    $('#submit').click(function(){
+      $.ajax({
+        url: 'index.php/user/check',
+        type: 'POST',
+        data: {'user_id': $('#user_id').val(),'user_pw': $('user_pw').val()},
+        dataType: 'html',
+        success: function(data){
+          if(data) {
+            $("#form1").slideUp('slow');
+            alert(data);
+            alert('로그인되었습니다.','index.php/user/main');
+          } else {
+            //alert(result);
+            $("#message").html("<p style='color:red'>아이디 또는 비밀번호가 잘못되었습니다.</p>");
+          }
+          // alert(data); // 결과 텍스트를 경고창으로 보여준다.
+        }
       });
-      $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
-    $(window).on('resize', function () {
-      if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-      if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
-  </script>
+    });
+</script>
 </body>
 
 </html>

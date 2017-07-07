@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Account</title>
-
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<!-- <link href="css/styles.css" rel="stylesheet"> -->
-
-</head>
+<?php $this->load->view('header'); ?>
 
 <body>
   <div class="container">
@@ -22,40 +6,73 @@
       <div class="login-panel panel panel-default">
         <div class="panel-heading">회원가입</div>
         <div class="panel-body">
-          <form role="form" action="index.php/user/user_account" method="post">
+          <form name="account" role="form" action="account" method="post">
             <fieldset>
-			  <div class="form-group">
-              <input class="form-control" placeholder="NAME" name="user_name" type="text" autofocus="" value="">
-            </div>
-            <div class="form-group">
-                <input class="form-control" placeholder="USER ID" name="user_id" type="text" value="">
-            </div>
-            <div class="form-group">
-              <input class="form-control" placeholder="PASSWORD" name="user_pw" type="password" value="">
-            </div>
-            <button type="submit" class="btn btn-primary">회원가입</button>
+  			      <div class="form-group">
+                <input class="form-control" placeholder="NAME" id="user_name" name="user_name" type="text" autofocus="" value="">
+              </div>
+              <div class="input-group">
+                <input class="form-control" placeholder="USER ID" id="user_id" name="user_id" type="text" value="">
+                <span class="input-group-addon">
+                  <input type="button" id="chk_id" value="중복확인">
+                  <input type="hidden" id="check" value="uncheck">
+                </span>
+              </div><br>
+              <div class="form-group">
+                <input class="form-control" placeholder="PASSWORD" id="user_pw" type="password" value=""><br>
+                <input class="form-control" placeholder="PASSWORD CHECK" id="ck_user_pw" type="password" value="">
+              </div>
+              <button type ="submit" id="confirm" class="btn btn-primary">회원가입</button>
+              <button type="button" id="cancelBtn" class="btn btn-primary" onclick="location.href='/index.php'">취소</button>
             </fieldset>
           </form>
         </div>
       </div>
     </div><!-- /.col-->
   </div><!-- /.container -->
-
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script>
-    !function ($) {
-      $(document).on("click","ul.nav li.parent > a > span.icon", function(){
-        $(this).find('em:first').toggleClass("glyphicon-minus");
-      });
-      $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
-    $(window).on('resize', function () {
-      if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-      if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
-  </script>
 </body>
+<?php $this->load->view('script'); ?>
+<script type="text/javascript">
+          $('#confirm').click(function(){
+              //빈칸 있는지 확인
+              if($('#user_name').val() == ""){
+                alert("이름을 입력해주세요.");
+                $('#user_name').focus();
+                return false;
+              } else if($('#user_id').val() == "") {
+                alert("아이디를 입력하세요.");
+                $('#user_id').focus();
+                return false;
+              } else if($('#user_pw').val() == "") {
+                alert("패스워드를 입력하세요.");
+                $('#user_pw').focus();
+                return false;
+              }
+              //패스워드 일치 확인
+              if($('#user_pw').val() != $('#ck_user_pw').val()) {
+                alert("비밀번호가 같지 않습니다.");
+                return false;
+              }
+            });
 
+          //중복확인 버튼 클릭시
+          $('#chk_id').click(function(){
+            $.ajax({
+              url: 'new_check',
+              type: 'POST',
+              data: {'user_id': $('#user_id').val()},
+              dataType: 'html',
+              success: function(data){
+                if(data) {
+                  alert("사용가능한 아이디입니다.");
+                  $('#chk_id').hide();
+                } else {
+                  alert("아이디가 중복됩니다. 다시입력해주세요.");
+                  $('#chk_id').focus();
+                }
+                // alert(data); // 결과 텍스트를 경고창으로 보여준다.
+              }
+            });
+          });
+   </script>
 </html>
