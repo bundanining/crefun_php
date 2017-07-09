@@ -49,6 +49,7 @@ class Board_c extends CI_Controller {
         $res['contents'] = $this->board_m->get_detail($id);
         $this->load->view('b_detail',$res);
       }
+<<<<<<< HEAD
     }
 	//게시글 수정 메소드
 	public function update(){
@@ -61,6 +62,10 @@ class Board_c extends CI_Controller {
 		$this->load->view('update',$res);
 	}
 	//게시글 삭제 메소드
+=======
+
+    }
+>>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
     public function delete() {
         $dataSet = array(
           'id' => $this->uri->segment(3),
@@ -72,7 +77,16 @@ class Board_c extends CI_Controller {
           echo "true";
         } else {
           echo "false";
+<<<<<<< HEAD
 		}
+=======
+        // if($this->board_m->delete($id)){
+        //   $flag = true;
+        //   $temp['flag'] = $flag;
+        //   $this->load->view('delete_success',$temp);
+        // }
+      }
+>>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
     }
   }
   ?>

@@ -29,7 +29,11 @@ class Board_m extends CI_Model {
     //게시글 데이터 입력
     function insert_contents($input_data) {
         //데이터 입력 쿼리
+<<<<<<< HEAD
         $sql = "INSERT INTO board (`title`,`content`,`writer`) VALUES ('".$input_data['title']."','".$input_data['content']."','".$input_data['writer']."')";
+=======
+        $sql = "INSERT INTO board (`title`,`content`,`writer`,`b_pw`) VALUES ('".$input_data['title']."','".$input_data['content']."','".$input_data['writer']."','".$input_data['pw']."')";
+>>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
         $res = $this->db->query($sql);
         return $res;
     }
@@ -49,6 +53,7 @@ class Board_m extends CI_Model {
           return false;
         }
     }
+<<<<<<< HEAD
 	function update($dataSet){
 		$sql = "UPDATE board set title='".$dataset['title']."', content='".$dataSet['content']."' WHERE id='".$dataSet['id']."'";
 		$res=$this->db->query($sql);
@@ -60,6 +65,10 @@ class Board_m extends CI_Model {
 	
     function delete($id) {
         $sql = "delete FROM board WHERE id='$id'";
+=======
+    function delete($id) {
+        $sql = "DELETE FROM board WHERE id='$id'";
+>>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
         $res = $this->db->query($sql);
         if($res){
           return true;

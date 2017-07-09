@@ -12,7 +12,11 @@
         <?php
             } else {
         ?>
+<<<<<<< HEAD
         <a href="/index.php" class="btn btn-primary"> 로그인 </a>
+=======
+        <a href="index.php" class="btn btn-primary"> 로그인 </a>
+>>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
         <?php
             }
         ?>
