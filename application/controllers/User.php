@@ -9,22 +9,9 @@ class User extends CI_Controller {
 		}
 	// index 페이지 라우팅
 	public function index()
-<<<<<<< HEAD
 	{
 		$this->load->view('login');
 	}
-=======
-  {
-		// $currentSession = $this -> session;
-		// // user_id 정보가 없는 경우는 접속 안한 것으로 간주함
-		// if (!$currentSession->userdata['logged_in']){
-		// 	$this->load->view('login');
-		// } else {
-		// 	redirect('board');
-		// }
-			$this->load->view('login');
-  }
->>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
 	//로그인 후 임시페이지
 	public function main()
 	{
@@ -38,15 +25,9 @@ class User extends CI_Controller {
 		$this->load->model('user_m');
 		$id = $this->input->post('user_id');
 		if(!$this->user_m->check_user($id)) {
-<<<<<<< HEAD
 			echo "true";
 		} else {
 			echo "false";
-=======
-			echo true;
-		} else {
-			echo false;
->>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
 		}
 	}
 	// 회원가입 라우팅
@@ -63,15 +44,9 @@ class User extends CI_Controller {
 	{
 		$this->load->model('user_m');
 		$auth_data = array(
-<<<<<<< HEAD
 			'user_id' => $this -> input -> post('user_id'),
 			'user_pw' => $this -> input -> post('user_pw')
 		);
-=======
-        'user_id' => $this -> input -> post('user_id'),
-        'user_pw' => $this -> input -> post('user_pw')
-    );
->>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
 		$res = $this->user_m->get_result($auth_data);
 		if($res) {
 			$newdata = array(

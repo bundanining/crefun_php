@@ -66,6 +66,7 @@
                 if(data) {
                   alert("사용가능한 아이디입니다.");
                   $('#chk_id').hide();
+                  $('#chk_id').val('checked');
                 } else {
                   alert("아이디가 중복됩니다. 다시입력해주세요.");
                   $('#chk_id').focus();

@@ -4,7 +4,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center;">글쓰기 페이지</div>
       <div class="panel-body">
-        <form action="insert" method="post" onsubmit="return check()">
+        <form action="insert" method="post" onsubmit="return check()" enctype="multipart/form-data">
           <table class="table">
             <thead>
               <tr>
@@ -22,10 +22,7 @@
         </div>
         <div class="panel panel-footer">
           <div class="input-group">
-            <span class="input-group-addon">
-              비밀번호:
-            </span>
-            <input type="password" id="pw" name="pw" value="">
+            <input id="userfile" type="file" name="userfile" size="20" />
             <button type ="submit" id="confirm" class="btn btn-primary">글작성</button>
             <button type ="button" id="cancelBtn" class="btn btn-primary" onclick="location.href='/index.php/board'">취소</button>
           </div><br>
@@ -36,7 +33,7 @@
 </body>
 <script type="text/javascript">
 function check() {
-    if($('#title').val() == "" || $('#content').val()== "" || $('#pw').val() == ""){
+    if($('#title').val() == "" || $('#content').val()== ""){
       alert('모든 내용을 채워주세요!!');
       return false;
     }else {

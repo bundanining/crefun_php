@@ -8,19 +8,26 @@ class Board_m extends CI_Model {
         $this->load->helper('url');
     }
 
-    function get_list() {
+    function get_list($id) {
         //$sql = "SELECT `id`, `title`, `hit`, `writer`, `date` FROM board ORDER BY id DESC";
+        $id = $id+3;
         $sql = "SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board
-                    INNER JOIN user_data ON board.writer=user_data.user_id";
+                    INNER JOIN user_data ON board.writer=user_data.user_id limit 4 offset $id";
         $query = $this -> db -> query($sql);
-        return $query->result();
+
+        return $query;
     }
-    function get_detail($id) {
-
+    function get_all(){
+      $sql="SELECT `id` FROM board";
+      $res= $this->db->query($sql);
+      return $res->num_rows();
+    }
+    function update_hits($id) {
         //조회수 증가 업데이트 구문
-        $sql0 = "UPDATE board SET hit = hit + 1 WHERE id='$id'";
-        $this->db->query($sql0);
-
+        $sql = "UPDATE board SET hit = hit + 1 WHERE id='$id'";
+        $this->db->query($sql);
+    }
+    function load_data($id) {
         //선택한 글내용 가져오기
         $sql = "SELECT * FROM board WHERE id = '$id'";
         $query = $this->db->query($sql);
@@ -29,13 +36,18 @@ class Board_m extends CI_Model {
     //게시글 데이터 입력
     function insert_contents($input_data) {
         //데이터 입력 쿼리
-<<<<<<< HEAD
         $sql = "INSERT INTO board (`title`,`content`,`writer`) VALUES ('".$input_data['title']."','".$input_data['content']."','".$input_data['writer']."')";
-=======
-        $sql = "INSERT INTO board (`title`,`content`,`writer`,`b_pw`) VALUES ('".$input_data['title']."','".$input_data['content']."','".$input_data['writer']."','".$input_data['pw']."')";
->>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
-        $res = $this->db->query($sql);
+
+        $res = array();
+        $res['result'] = $this->db->query($sql);
+        $res['id']=$this->db->insert_id();
         return $res;
+    }
+    function insert_file($data) {
+        $sql = "INSERT INTO upload_file (`format`,`filename`,`size`,`path`,`post_id`) VALUES ('".$data['file_type']."','".$data['file_name']."','".$data['file_size']."','".$data['full_path']."','".$data['post_id']."')";
+
+        $this->db->query($sql);
+
     }
     function id_check($dataSet) {
         $uid = $dataSet['u_id'];
@@ -53,22 +65,25 @@ class Board_m extends CI_Model {
           return false;
         }
     }
-<<<<<<< HEAD
-	function update($dataSet){
-		$sql = "UPDATE board set title='".$dataset['title']."', content='".$dataSet['content']."' WHERE id='".$dataSet['id']."'";
-		$res=$this->db->query($sql);
-		if($res)
-			return true;
-		else
-			return false;
-	}
-	
-    function delete($id) {
-        $sql = "delete FROM board WHERE id='$id'";
-=======
+	  function update($dataSet){
+      $sql0 = "SELECT `title`,`content` FROM board WHERE id='".$dataSet['id']."'";
+      $result=$this->db->query($sql)->row_array();
+
+  		$sql = "UPDATE board set title='".$result['title']."', content='".$result['content']."' WHERE id='".$dataSet['id']."'";
+  		$res=$this->db->query($sql);
+    		if($res)
+    			return true;
+    		else
+    			return false;
+	  }
+    function loadData($id){
+      //선택한 글내용 가져오기
+      $sql = "SELECT `title`,`content` FROM board WHERE id='".$dataSet['id']."'";
+      $query = $this->db->query($sql);
+      return $query->row();
+    }
     function delete($id) {
         $sql = "DELETE FROM board WHERE id='$id'";
->>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
         $res = $this->db->query($sql);
         if($res){
           return true;

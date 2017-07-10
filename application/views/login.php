@@ -66,10 +66,6 @@
             alert(data);
             alert('로그인되었습니다.','index.php/user/main');
           } else {
-<<<<<<< HEAD
-			console.log(data);
-=======
->>>>>>> cf0af5e8a61e47e11ddebbd6218795b7fd80d9e1
             //alert(result);
             $("#message").html("<p style='color:red'>아이디 또는 비밀번호가 잘못되었습니다.</p>");
           }
