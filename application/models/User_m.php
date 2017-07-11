@@ -9,7 +9,7 @@ class User_m extends CI_Model {
     }
 
     function get_result($auth) {
-        $sql = "SELECT `user_id`, `user_name`, `user_pw` FROM user_data WHERE `user_id` ='" .$auth['user_id']. "' ";
+        $sql = "SELECT `user_name`, `user_pw` FROM user_data WHERE `user_id` ='" .$auth['user_id']. "' ";
         $query = $this -> db -> query($sql);
         $row = $query->row_array();
         if(password_verify($auth['user_pw'], $row['user_pw']))
@@ -21,8 +21,8 @@ class User_m extends CI_Model {
             return false;
         }
     }
-    function check_user($id) {
-      $sql = "SELECT `user_id` FROM user_data WHERE `user_id` = '$id'";
+    function check_user($uid) {
+      $sql = "SELECT `user_id` FROM user_data WHERE `user_id` = '$uid'";
       $result = $this -> db -> query($sql);
       if($result->num_rows() > 0)
         return true;
