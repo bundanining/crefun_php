@@ -1,14 +1,13 @@
-
+<?php $this->load->view('header') ?>
 <body>
   <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
     <div class="panel panel-default">
-      <div class="panel-heading" style="text-align: center;">글 목록 페이지<br>
-        <?php $this->load->view('header') ?>
+      <div class="panel-heading" style="text-align: center;"><p>글 목록 페이지</p>
         <?php
             if (@$this -> session -> userdata('logged_in') == TRUE) {
         ?>
         <?php echo $this -> session -> userdata('user_name');?> 님 환영합니다.
-        <a href="user/logout" class="btn">로그아웃</a>
+        <a id="logoutBtn" href="/index.php/user/logout" class="btn btn-primary">로그아웃</a>
         <?php
             } else {
         ?>
@@ -35,7 +34,7 @@
             ?>
               <tr>
                 <th><?php echo $row->id; ?></th>
-                <th><a href="board/list/<?php echo $row->id;?>"><?php echo $row->title; ?></a></th>
+                <th><a href="/index.php/board/list/<?php echo $row->id;?>"><?php echo $row->title; ?></a></th>
                 <th><?php echo $row->user_name; ?></th>
                 <th><?php echo $row->hit; ?></th>
                 <th><?php echo $row->date; ?></th>
@@ -43,18 +42,30 @@
             <?php
             } ?>
           </tbody>
-          <tfoot>
+          <tfoot style="float: right;">
             <tr>
-              <th colspan="5">
-                  <a href="board" class="btn btn-primary">목록 </a>
-                  <a href="board/write" class="btn btn-primary">글쓰기 </a>
-                  <a href="/index.php/user/logout" class="btn btn-primary">로그아웃 </a>
-                  <a href="board" class="btn btn-primary">메인으로 </a>
+              <th>
+                  <a href="/index.php/board">
+                    <span id="list" class="glyphicon glyphicon-menu-hamburger"></span>
+                  </a>
+                  <a href="/index.php/board/write">
+                    <span id="write" class="glyphicon glyphicon-pencil"></span>
+                  </a>
+                  <a href="/index.php">
+                    <span id="main" class="glyphicon glyphicon-home"></span>
+                  </a>
               </th>
-              <th><?php echo $this->pagination->create_links(); ?></th>
+            </tr>
+            <tr>
+              <th>
+                <ul class="pagination">
+                  <?php echo $this->pagination->create_links(); ?>
+                </ul>
+            </th>
             </tr>
           </tfoot>
         </table>
+
       </div>
     </div>
   </div>

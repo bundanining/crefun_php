@@ -49,28 +49,5 @@
         // alert(data); // 결과 텍스트를 경고창으로 보여준다.
       }
     });
-
   });
-  // $('#check').val()=='check' && $('#updateBtn').click(function(){
-  //   $.ajax({
-  //     url: 'update',
-  //     type: 'POST',
-  //     data: {
-  //       'id': <?php echo $contents->id ?>,
-  //       'title': $('#title').val(),
-  //       'content': $('#content').val()
-  //     },
-  //     dataType: 'html',
-  //     success: function(data){
-  //       if(data=="true") {
-  //         //console.log(data);
-  //         alert("수정되었습니다.");
-  //         location.href="/index.php/board/list/<?php echo $contents->id ?>"
-  //       } else {
-  //         alert("error");
-  //       }
-  //       // alert(data); // 결과 텍스트를 경고창으로 보여준다.
-  //     }
-  //   });
-  // });
 </script>

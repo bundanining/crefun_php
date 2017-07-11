@@ -13,13 +13,23 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+<link rel="stylesheet" href="/include/css/login.css">
 </head>
 <body>
   <div class="container">
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
       <div class="login-panel panel panel-default">
-        <div class="panel-heading">LOGIN</div>
+        <div class="panel-heading">
+          <header>LOGIN</header>
+          <?php
+              if (@$this -> session -> userdata('logged_in') == TRUE) {
+          ?>
+          <p><?php echo $this -> session -> userdata('user_name');?> 님 환영합니다.</p>
+          <a id="logoutBtn" href="/index.php/user/logout" class="btn btn-primary">로그아웃</a>
+          <a class="btn btn-primary" href="/index.php/board">게시판으로 가기</a>
+        </div>
+          <?php
+        } else { ?>
         <div class="panel-body">
           <form id="form1" role="form" action="index.php/user/main" method="post" onsubmit="return false">
             <fieldset>
@@ -32,14 +42,14 @@
               <button id="submit" class="btn btn-primary">Login</button>
             </fieldset>
           </form>
-          <a href="index.php/user/join">회원가입</a>
-          <a href="index.php/user/main">게시판으로 가기</a>
+          <a href="/index.php/user/join">회원가입</a>
+          <a href="/index.php/user/main">게시판으로 가기</a>
         </div>
         <div id="message"></div>
       </div>
     </div><!-- /.col-->
   </div><!-- /.row -->
-
+<?php } ?>
 <?php $this->load->view('script'); ?>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -63,8 +73,8 @@
         success: function(data){
           if(data) {
             $("#form1").slideUp('slow');
-            alert(data);
-            alert('로그인되었습니다.','index.php/user/main');
+            // alert(data);
+            alert('로그인되었습니다.','/index.php/board');
           } else {
             //alert(result);
             $("#message").html("<p style='color:red'>아이디 또는 비밀번호가 잘못되었습니다.</p>");
