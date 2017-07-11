@@ -53,23 +53,28 @@ class Board_c extends CI_Controller {
     }
     public function index() {
         //페이지네이션
-        if($this -> uri -> segment(2) == NULL){
-          $id = 1;
-        }else{
-          $id = $this -> uri -> segment(2);
+        $page = $this -> uri -> segment(2, 1);
+        if($page > 1){
+          $start = $page;
+        } else {
+          $start = $page - 1;
         }
-        $this->load->library('pagination');
-        $query = $this->board_m->get_list($id);
+        $config['per_page'] = 5;
+        $limit = $config['per_page'];
         $count = $this->board_m->get_all();
+        $query = $this->board_m->get_list($start,$limit);
+
+        $this->load->library('pagination');
+
         //페이지네이션 config
         $config['base_url'] = '/index.php/board';
         $config['total_rows'] = $count;
-        $config['per_page'] = 4;
         $config['reuse_query_string'] = FALSE;
         $res = array(
             'list' => $query->result(),
             'pagination' => $this->pagination
         );
+
         $this->pagination->initialize($config);
         $this->load->view('b_list',$res);
     }

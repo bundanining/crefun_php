@@ -12,15 +12,7 @@ class User extends CI_Controller {
 	{
 		$this->load->view('login');
 	}
-	//로그인 후 임시페이지
-	public function main()
-	{
-		redirect('board', 'refresh');
-	}
-	// 아이디 중복 검사
-	public function check_page() {
-		$this->load->view('check_page');
-	}
+	//아이디 중복검사
 	public function new_check() {
 		$this->load->model('user_m');
 		$id = $this->input->post('user_id');
@@ -51,7 +43,7 @@ class User extends CI_Controller {
 		if($res) {
 			$newdata = array(
 					 'user_name'  => $res->user_name,
-					 'user_id'     => $res->user_id,
+					 'user_id'     => $auth_data['user_id'],
 					 'logged_in' => TRUE
 			);
 			$this->session->set_userdata($newdata);
