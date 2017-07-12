@@ -90,6 +90,7 @@ class Board_c extends CI_Controller {
         //글 데이터 가져오기
         $this->board_m->update_hits($id);
         $res['contents'] = $this->board_m->load_data($id);
+        print_r($res['contents']);
         $this->load->view('b_detail',$res);
       }
     }
