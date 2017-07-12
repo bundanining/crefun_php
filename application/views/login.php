@@ -31,7 +31,7 @@
           <?php
         } else { ?>
         <div class="panel-body">
-          <form id="form1" role="form" action="index.php/user/main" method="post" onsubmit="return false">
+          <form id="form1" role="form" action="/index.php" method="post" onsubmit="return false">
             <fieldset>
               <div class="form-group">
                 <input class="form-control" placeholder="USER ID" id="user_id" type="text" autofocus="" value="">
@@ -43,7 +43,7 @@
             </fieldset>
           </form>
           <a href="/index.php/user/join">회원가입</a>
-          <a href="/index.php/user/main">게시판으로 가기</a>
+          <a href="/index.php/board">게시판으로 가기</a>
         </div>
         <div id="message"></div>
       </div>
