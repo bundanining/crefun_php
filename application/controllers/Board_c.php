@@ -26,7 +26,7 @@ class Board_c extends CI_Controller {
         );
         $res = $this->board_m->insert_contents($input_data);
         $config = array();
-        $config['upload_path'] = '/home/ubuntu/crefun_php/upload';
+        $config['upload_path'] = '/home/ubuntu/crefun_php/upload/'.$res['id'];
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size']      = '0';
         $config['overwrite']     = FALSE;
@@ -35,11 +35,12 @@ class Board_c extends CI_Controller {
           $error = array('error' => $this->upload->display_errors());
           print_r($error['error']);
         } else {
+          mkdir($config['upload_path']);
           $data = array(
             'post_id' => $res['id'],
             'file_name' => $this->upload->data('file_name'),
             'file_type' => $this->upload->data('file_type'),
-            'full_path' => $this->upload->data('full_path'),
+            'client_name' => $this->upload->data('client_name'),
             'file_size' => $this->upload->data('file_size')
         );
           $this->board_m->insert_file($data);
@@ -90,7 +91,6 @@ class Board_c extends CI_Controller {
         //글 데이터 가져오기
         $this->board_m->update_hits($id);
         $res['contents'] = $this->board_m->load_data($id);
-        print_r($res['contents']);
         $this->load->view('b_detail',$res);
       }
     }
