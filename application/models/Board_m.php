@@ -28,7 +28,8 @@ class Board_m extends CI_Model {
     }
     function load_data($id) {
         //선택한 글내용 가져오기
-        $sql = "SELECT * FROM board WHERE id = '$id'";
+        $sql = "SELECT board.id, board.title, board.content, upload_file.path FROM board INNER JOIN upload_file ON board.id=upload_file.post_id WHERE board.id='$id'";
+        //$sql = "SELECT * FROM board WHERE id = '$id'";
         $query = $this->db->query($sql);
         return $query->row();
     }
