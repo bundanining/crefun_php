@@ -64,27 +64,12 @@ class Board_m extends CI_Model {
           return false;
         }
     }
-	  // function update($dataSet){
-    //   $sql0 = "SELECT `title`,`content` FROM board WHERE id='".$dataSet['id']."'";
-    //   $result=$this->db->query($sql)->row_array();
-    //
-  	// 	$sql = "UPDATE board set title='".$result['title']."', content='".$result['content']."' WHERE id='".$dataSet['id']."'";
-  	// 	$res=$this->db->query($sql);
-    // 		if($res)
-    // 			return true;
-    // 		else
-    // 			return false;
-	  // }
-    // function loadData($id){
-    //   //선택한 글내용 가져오기
-    //   $sql = "SELECT `title`,`content` FROM board WHERE id='".$dataSet['id']."'";
-    //   $query = $this->db->query($sql);
-    //   return $query->row();
-    // }
     function delete($id) {
         $sql = "DELETE FROM board WHERE id='$id'";
         $res = $this->db->query($sql);
-        if($res){
+        $sql2 = "DELETE FROM upload_file WHERE post_id ='$id'";
+        $res2 = $this->db->query($sql2);
+        if($res && $res2){
           return true;
         } else {
           return false;
