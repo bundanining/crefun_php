@@ -4,7 +4,8 @@
     <div class="panel panel-default">
       <div class="panel-heading">TITLE: <?php echo $contents->title ?> </div>
       <div class="panel-body">
-        <?php echo $contents->content ?>
+        <?php echo $contents->content ?><br>
+        <img src="<?php echo $contests->path ?>" alt="">
       </div>
       <a href="/index.php/board" class="btn btn-primary">목록으로</a>
       <button id="updateBtn" class="btn btn-primary">수정하기</button>
