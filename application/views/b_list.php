@@ -42,9 +42,9 @@
             <?php
             } ?>
           </tbody>
-          <tfoot style="float: right;">
+          <tfoot>
             <tr>
-              <th>
+              <th colspan="5">
                   <a href="/index.php/board">
                     <span id="list" class="glyphicon glyphicon-menu-hamburger"></span>
                   </a>
@@ -57,7 +57,7 @@
               </th>
             </tr>
             <tr>
-              <th>
+              <th align= "center" colspan="5">
                 <ul class="pagination">
                   <?php echo $this->pagination->create_links(); ?>
                 </ul>
