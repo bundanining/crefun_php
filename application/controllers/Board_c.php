@@ -14,10 +14,10 @@ class Board_c extends CI_Controller {
         $start = $this -> uri -> segment(2, 0);
         if($start < 1){
           $start = 0;
-          $limit = 4;
+          $limit = 5;
         } else {
           $limit = $start * 5;
-          $start = $limit - 5;
+          $start = $limit - 4;
         }
         $count = $this->board_m->get_all();
         $query = $this->board_m->get_list($start,$limit);
