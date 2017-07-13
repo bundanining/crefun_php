@@ -145,16 +145,14 @@ class Board_c extends CI_Controller {
       if($start > 0){
         $start = $start * $limit -$limit;
       }
+      $data = array();
       if(!isset($_GET['c'])
         $data['fileChk']="unchecked";
       else {
         $data['fileChk']=$_GET['c'];
       }
-
-      $data = array(
-        'condition' => $_GET['o'],
-        'data' => $_GET['q']
-      );
+      $data['condition'] = $_GET['o'];
+      $data['data'] = $_GET['q'];
 
       $query = $this->board_m->get_search($start,$limit,$data);
       $query2 = $this->board_m->get_search_all($data);
