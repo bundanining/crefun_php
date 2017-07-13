@@ -58,20 +58,11 @@
             </tr>
           </tfoot>
         </table>
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">글 제목<span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">글제목</a></li>
-              <li><a href="#">글내용</a></li>
-              <li><a href="#">작성자</a></li>
-            </ul>
-          </div><!-- /btn-group -->
-          <input type="text" class="form-control" aria-label="...">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Search</button>
-          </span>
-        </div><!-- /input-group -->
+        <form class="navbar-search pull-left" action="/">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">제목<span class="caret"></span></button>
+            <input type="text" class="search-query" placeholder="검색">
+            <button id="searchBtn" class="btn btn-default" type="submit">검색</button>
+        </form>
         <ul class="pagination">
           <?php echo $this->pagination->create_links(); ?>
         </ul>
