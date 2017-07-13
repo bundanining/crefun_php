@@ -139,6 +139,7 @@ class Board_c extends CI_Controller {
     public function search() {
       //페이지네이션 게시글 5개씩 출력
       $start = $this -> uri -> segment(4, 0);
+      print_r($start);
       $config['per_page'] = 5;  // 한쪽에 표현될 아이템의 갯수
       //페이지네이션 게시글 5개씩 출력
       $limit = $config['per_page'];
