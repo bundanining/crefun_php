@@ -57,7 +57,7 @@ class Board_m extends CI_Model {
         // }
 
         //$sql = "SELECT board.id, board.title, board.content, upload_file.path FROM board LEFT JOIN upload_file ON board.id=upload_file.post_id WHERE board.id='$id'";
-        $sql = "SELECT `title`,`content`,`path` FROM board WHERE id='$id'"
+        $sql = "SELECT `title`,`content`,`path` FROM board WHERE id='$id'";
         $query = $this->db->query($sql);
         return $query->row();
     }
