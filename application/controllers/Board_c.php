@@ -147,7 +147,8 @@ class Board_c extends CI_Controller {
       }
       $data = array(
         'condition' => $_GET['o'],
-        'data' => $_GET['q']
+        'data' => $_GET['q'],
+        'fileChk' => $GET['c']
       );
       $query = $this->board_m->get_search($start,$limit,$data);
       $query2 = $this->board_m->get_search_all($data);

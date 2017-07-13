@@ -65,6 +65,7 @@
               <option value="writer">작성자</option>
             </select>
             <input name="q" id="q" type="text" class="form-control" placeholder="검색">
+            <input type="checkbox" name="c" value="check">
             <button class="btn btn-default" type="submit">검색</button>
         </form>
         <ul class="pagination">
