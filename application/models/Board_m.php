@@ -26,27 +26,47 @@ class Board_m extends CI_Model {
         $sql = "UPDATE board SET hit = hit + 1 WHERE id='$id'";
         $this->db->query($sql);
     }
+    function update($dataSet){
+        // 게시글 업데이트
+        $sql = "UPDATE board SET title = '".$dataSet['title']."', content = '".$dataSet['content']."' WHERE id='".$dataSet['id']."' ";
+        if($this->db->query($sql))
+          return true;
+        else
+          return false;
+    }
     function load_data($id) {
-        //선택한 글내용 가져오기
-        $sql0 = "SELECT * FROM upload_file WHERE post_id = '$id'";
-        $tmp = $this->db->query($sql0);
-        if($tmp->num_rows > 0){
-            $sql = "SELECT board.id, board.title, board.content, upload_file.path FROM board INNER JOIN upload_file ON board.id=upload_file.post_id WHERE board.id='$id'";
-        } else {
-            $sql = "SELECT * FROM board WHERE id = '$id'";
-        }
+        // 20170712 LEFT 조인으로 교체할 것.
+        // 선택한 글내용 가져오기
+        // $sql0 = "SELECT * FROM upload_file WHERE post_id = '$id'";
+        // $tmp = $this->db->query($sql0);
+        // if($tmp->num_rows() > 0){
+        //     $sql = "SELECT board.id, board.title, board.content, upload_file.path FROM board LEFT JOIN upload_file ON board.id=upload_file.post_id WHERE board.id='$id'";
+        // } else {
+        //     $sql = "SELECT * FROM board WHERE id = '$id'";
+        // }
+
+        $sql = "SELECT board.id, board.title, board.content, upload_file.path FROM board LEFT JOIN upload_file ON board.id=upload_file.post_id WHERE board.id='$id'";
         $query = $this->db->query($sql);
         return $query->row();
     }
     //게시글 데이터 입력
-    function insert_contents($input_data) {
-        //데이터 입력 쿼리
-        $sql = "INSERT INTO board (`title`,`content`,`writer`) VALUES ('".$input_data['title']."','".$input_data['content']."','".$input_data['writer']."')";
+    function insert_contents($input_data,$tmp) {
 
+        //데이터 입력 쿼리
+        if($tmp == 0){
+        $sql = "INSERT INTO board (`title`,`content`,`writer`) VALUES ('".$input_data['title']."','".$input_data['content']."','".$input_data['writer']."')";
         $res = array();
         $res['result'] = $this->db->query($sql);
         $res['id']=$this->db->insert_id();
         return $res;
+        }
+        else {
+          $path = $input_data['id']."/".$input_data['client_name'];
+          $id = $input_data['id'];
+          $sql = "UPDATE board SET u_file='$path' WHERE id='$id'";
+          $this->db->query($sql);
+          return true;
+        }
     }
     function insert_file($data) {
         $path = $data['post_id']."/".$data['client_name'];

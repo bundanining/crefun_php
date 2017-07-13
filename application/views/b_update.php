@@ -4,7 +4,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center;">글쓰기 페이지</div>
       <div class="panel-body">
-        <form action="/index.php/board/insert" method="post" onsubmit="return check()">
+        <form action="/index.php/board/update_post/<?php echo $id ?>" method="post" onsubmit="return check()">
           <table class="table">
             <thead>
               <tr>

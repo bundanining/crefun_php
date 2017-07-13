@@ -8,6 +8,36 @@ class Board_c extends CI_Controller {
       $this->load->helper('url');
       $this->load->helper('form');
 		}
+    //게시판 목록 메인
+    public function index() {
+        //페이지네이션 게시글 5개씩 출력
+        $start = $this -> uri -> segment(2, 1);
+        if($start < 1){
+          $start = 1;
+        } else {
+          $limit = $start * 5;
+          $start = $limit - 4;
+        }
+        $count = $this->board_m->get_all();
+        $query = $this->board_m->get_list($start,$limit);
+
+        $this->load->library('pagination');
+
+        //페이지네이션 config
+        $config['num_links'] = 2; // 쪽선택 몇개씩 보여줄것인지 2이면 1,2,3,4,5까지 보임
+        $config['per_page'] = 5; // 한쪽에 표현될 아이템의 갯수
+        $config['use_page_numbers'] = TRUE; //URI 새그먼트는 페이징하는 아이템들의 시작 인덱스를 사용함. 실제 페이지 번호를 보여주고 싶다면, TRUE
+        $config['base_url'] = '/index.php/board'; //페이지네이션이 보여질 url
+        $config['total_rows'] = $count; //전체 행의 개수
+        $config['reuse_query_string'] = true; 
+        $res = array(
+            'list' => $query->result(),
+            'pagination' => $this->pagination
+        );
+
+        $this->pagination->initialize($config);
+        $this->load->view('b_list',$res);
+    }
     public function write() {
         $currentSession = $this -> session;
         // user_id 정보가 없는 경우는 접속 안한 것으로 간주함
@@ -24,59 +54,32 @@ class Board_c extends CI_Controller {
             'content' => $this -> input -> post('content'),
             'writer' => $this -> session -> userdata('user_id'),
         );
-        $res = $this->board_m->insert_contents($input_data);
-        $config = array();
-        $config['upload_path'] = '/home/ubuntu/crefun_php/upload/'.$res['id'];
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size']      = '0';
-        $config['overwrite']     = FALSE;
-        $this->load->library('upload',$config);
-        if(!$this->upload->do_upload('userfile')){
-          $error = array('error' => $this->upload->display_errors());
-          print_r($error['error']);
-        } else {
-          mkdir($config['upload_path']);
-          $data = array(
-            'post_id' => $res['id'],
-            'file_name' => $this->upload->data('file_name'),
-            'file_type' => $this->upload->data('file_type'),
-            'client_name' => $this->upload->data('client_name'),
-            'file_size' => $this->upload->data('file_size')
-        );
-          $this->board_m->insert_file($data);
+        $res = $this->board_m->insert_contents($input_data,0);
+        if(isset($_FILES)) {
+          $config = array();
+          $config['upload_path'] = '/home/ubuntu/crefun_php/upload/'.$res['id'];
+          $config['allowed_types'] = 'gif|jpg|png';
+          $config['max_size']      = '0';
+          $config['overwrite']     = FALSE;
+          $this->load->library('upload',$config);
+          //디렉토리 생성
+          $path="./upload/".$res['id'];
+          mkdir($path);
+          if(!$this->upload->do_upload('userfile')){
+            $error = array('error' => $this->upload->display_errors());
+          } else {
+            $data = array(
+              'id' => $res['id'],
+              'client_name' => $this->upload->data('client_name')
+            );
+            $this->board_m->insert_contents($data,1);
+          }
         }
         $flag = false;
         if($res['result'])
           $flag = true;
         $temp['flag'] = $flag;
         $this->load->view('input_success',$temp);
-    }
-    public function index() {
-        //페이지네이션
-        $page = $this -> uri -> segment(2, 1);
-        if($page > 1){
-          $start = $page;
-        } else {
-          $start = $page - 1;
-        }
-        $config['per_page'] = 5;
-        $limit = $config['per_page'];
-        $count = $this->board_m->get_all();
-        $query = $this->board_m->get_list($start,$limit);
-
-        $this->load->library('pagination');
-
-        //페이지네이션 config
-        $config['base_url'] = '/index.php/board';
-        $config['total_rows'] = $count;
-        $config['reuse_query_string'] = FALSE;
-        $res = array(
-            'list' => $query->result(),
-            'pagination' => $this->pagination
-        );
-
-        $this->pagination->initialize($config);
-        $this->load->view('b_list',$res);
     }
     public function detail(){
       $currentSession = $this -> session;
@@ -94,8 +97,8 @@ class Board_c extends CI_Controller {
         $this->load->view('b_detail',$res);
       }
     }
-    //게시글 수정 메소드
-    public function update(){
+    //게시글 수정로드 메소드
+    public function update_view(){
       $res=$this->board_m->load_data($this->uri->segment(3));
       $dataSet = array(
     		'id' => $this->uri->segment(3),
@@ -104,7 +107,18 @@ class Board_c extends CI_Controller {
     	);
       $this->load->view('b_update',$dataSet);
     }
-
+    //게시글 수정 메소드
+    public function update_post(){
+      $dataSet = array(
+    		'id' => $this->uri->segment(3),
+    		'title' => $this->input->post('title'),
+    		'content' => $this->input->post('content')
+    	);
+      $res['flag']=$this->board_m->update($dataSet);
+      if($res['flag']){
+        $this->load->view('input_success',$res);
+      }
+    }
     //게시글 삭제 메소드
     public function delete() {
         $dataSet = array(
@@ -113,11 +127,35 @@ class Board_c extends CI_Controller {
         );
         if($this->board_m->id_check($dataSet)){
           $flag = false;
-          $this->board_m->delete($this->uri->segment(3));
+          $id = $this->uri->segment(3);
+          $path = './upload/'.$id;
+          $this->board_m->delete($id);
+          $this->rmdir_all($path);
           echo "true";
         } else {
           echo "false";
         }
+    }
+
+    //하위파일포함 디렉토리 삭제 메소드 2017.07.13
+    function rmdir_all($dir) {
+      if (!file_exists($dir)) {
+        return;
+      }
+      $dhandle = opendir($dir);
+      if ($dhandle) {
+        while (false !== ($fname = readdir($dhandle))) {
+           if (is_dir( "{$dir}/{$fname}" )) {
+              if (($fname != '.') && ($fname != '..')) {
+                 $this->rmdir_all("$dir/$fname");
+              }
+           } else {
+              unlink("{$dir}/{$fname}");
+           }
+        }
+        closedir($dhandle);
+      }
+      rmdir($dir);
     }
 }
 ?>
