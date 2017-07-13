@@ -58,11 +58,38 @@
             </tr>
           </tfoot>
         </table>
-        <form class="navbar-search pull-left" action="/">
+        <div class="pull-right">
+            <a class="btn btn-default" data-toggle="collapse" data-target=".board-bottom-search-collapse"><i class='fa fa-search'></i></a>
+        </div>
+        <div class="pull-right collapse navbar-collapse board-bottom-search-collapse">
+            <div class="form-group">
+                <label class="sr-only">검색</label>
+                <select name=select class="form-control">
+                <option value='s_title'>제목</option>
+                <option value='s_content'>내용</option>
+                <option value='s_writer'>작성자</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="stx">stx</label>
+                <input name=stx maxlength=15 size=10 itemname="검색어" required value='<?=stripslashes($stx)?>' class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="sop">sop</label>
+                <select name=sop class="form-control">
+                    <option value=and>and</option>
+                    <option value=or>or</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">검색</button>
+            </div>
+        </div>
+        <!-- <form class="navbar-search pull-left" action="/">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">제목<span class="caret"></span></button>
             <input type="text" class="search-query" placeholder="검색">
             <button id="searchBtn" class="btn btn-default" type="submit">검색</button>
-        </form>
+        </form> -->
         <ul class="pagination">
           <?php echo $this->pagination->create_links(); ?>
         </ul>
