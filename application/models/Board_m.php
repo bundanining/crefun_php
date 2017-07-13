@@ -21,8 +21,8 @@ class Board_m extends CI_Model {
         $sub_sql="SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board INNER JOIN user_data ON board.writer=user_data.user_id";
         $sub_sql2="LIMIT".$start.",".$limit;
         if(strcasecmp($dataSet['condition'],'content') || strcasecmp($dataSet['condition'],'content')){
-          $condition = "WHERE ".$dataSet['condition']." regexp '".$dataSet['data']."' "
-        } else if(strcasecmp($dataSet['condition'],'writer')){
+          $condition = "WHERE ".$dataSet['condition']." regexp '".$dataSet['data']."' ";
+        } else if(strcasecmp($dataSet['condition'],'writer')) {
           $condition = "WHERE user_data.user_name=".$dataSet['data'];
         }
         $sql = $sub_sql.$condition.$sub_sql2;
