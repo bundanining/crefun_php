@@ -144,8 +144,11 @@ class Board_c extends CI_Controller {
         $limit = $start * 5;
         $start = $limit - 4;
       }
-
-      $query = $this->board_m->get_list($start,$limit);
+      $data = array(
+        'condition' => $this->input->post('searchItem'),
+        'data' => $this->input->post('searchBox')
+      );
+      $query = $this->board_m->get_search($start,$limit,$data);
       $count = $query->num_rows();
 
       $this->load->library('pagination');
