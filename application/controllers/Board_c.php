@@ -146,8 +146,9 @@ class Board_c extends CI_Controller {
         $start = $start * $limit -$limit;
       }
       $data = array();
-      if(!isset($_GET['c'])
+      if(!isset($_GET['c']){
         $data['fileChk']="unchecked";
+      }
       else {
         $data['fileChk']=$_GET['c'];
       }
