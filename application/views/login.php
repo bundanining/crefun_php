@@ -75,6 +75,7 @@
             $("#form1").slideUp('slow');
             // alert(data);
             alert('로그인되었습니다.','/index.php/board');
+            $("#message").html("환영합니다.");
           } else {
             //alert(result);
             $("#message").html("<p style='color:red'>아이디 또는 비밀번호가 잘못되었습니다.</p>");
