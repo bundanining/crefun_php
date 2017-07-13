@@ -22,6 +22,11 @@ class Board_m extends CI_Model {
                     INNER JOIN user_data ON board.writer=user_data.user_id WHERE ".$dataSet['condition']." = '".$dataSet['data']."' LIMIT $start, $limit";
         return $this->db->query($sql);
     }
+    function get_search_all($dataSet){
+        $sql = "SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board
+                  INNER JOIN user_data ON board.writer=user_data.user_id WHERE ".$dataSet['condition']." = '".$dataSet['data']."'";
+        return $this->db->query($sql);
+    }
     function get_all() {
       $sql="SELECT `id` FROM board";
       $res= $this->db->query($sql);
