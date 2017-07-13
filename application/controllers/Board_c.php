@@ -140,7 +140,6 @@ class Board_c extends CI_Controller {
       $start = $this -> uri -> segment(3, 0);
       $config['per_page'] = 5;  // 한쪽에 표현될 아이템의 갯수
       //페이지네이션 게시글 5개씩 출력
-      $start = $this -> uri -> segment(2, 0);
       $limit = $config['per_page'];
       // print_r($start);
       if($start > 0){
