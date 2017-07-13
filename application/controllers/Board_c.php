@@ -145,8 +145,8 @@ class Board_c extends CI_Controller {
         $start = $start * $limit -$limit;
       }
       $data = array(
-        'condition' => $this->input->post('searchItem'),
-        'data' => $this->input->post('searchBox')
+        'condition' => $this->input->get('searchItem'),
+        'data' => $this->input->get('searchBox')
       );
       $query = $this->board_m->get_search($start,$limit,$data);
       $count = $query->num_rows();

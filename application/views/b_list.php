@@ -58,7 +58,7 @@
             </tr>
           </tfoot>
         </table>
-        <form class="form-group form-inline" method="post" action="/index.php/board/search">
+        <form class="form-group form-inline" method="get" action="/index.php/board/search">
             <select class="form-control" name="searchItem" id="searchItem">
               <option value="title">제목</option>
               <option value="content">내용</option>
