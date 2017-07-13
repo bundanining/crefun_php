@@ -29,7 +29,11 @@ class Board_m extends CI_Model {
         } else if(strcasecmp($dataSet['condition'],'writer')) {
           $condition = " WHERE user_data.user_name='".$dataSet['data']."'";
         }
-        $sql = $sub_sql.$condition.$tmp.$sub_sql2;
+        if(strcmp($tmp,'')){
+          $sql = $sub_sql.$condition.$sub_sql2;
+        } else {
+          $sql = $sub_sql.$condition.$tmp.$sub_sql2;
+        }
         return $this->db->query($sql);
     }
     function get_search_all($dataSet){
