@@ -4,7 +4,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center;">글쓰기 페이지</div>
       <div class="panel-body">
-        <form action="insert" method="post" onsubmit="return check()" enctype="multipart/form-data">
+        <form id="form" action="insert" method="post" onsubmit="return check()" enctype="multipart/form-data">
           <table class="table">
             <thead>
               <tr>
@@ -40,4 +40,32 @@ function check() {
       return true;
     }
 }
+$(document).read(function(){
+  $('#form').submit(function(e){
+    e.preventDefault();
+
+    var form=$('form')[0];
+    var formData = new FormData(form);
+    var upfiles_cnt = $("input:file",this)[0].files.length;
+
+    $(this).ajaxSubmit({
+      dataType: 'json',
+      beforeSend: function() {
+        status.fadeOut();
+        bar.width('0%');
+        percent.html('0%');
+      },
+      uploadProgress: function(event,position,total,percentComplete){
+        var pVel = percentComplete + '%';
+        bar.width(pVel);
+        percent.html(pVel);
+      },
+      complete: function(data){
+        status.html(data.responseJSON.count+'파일이 업로드되었습니다.').fadeIn();
+      },
+      resetForm: true
+    });
+    return false;
+  });
+});
 </script>
