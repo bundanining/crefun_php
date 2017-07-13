@@ -11,12 +11,12 @@ class Board_c extends CI_Controller {
     //게시판 목록 메인
     public function index() {
         //페이지네이션 게시글 5개씩 출력
-        $start = $this -> uri -> segment(2, 0);
+        $start = $this -> uri -> segment(2, 1);
         if($start < 1){
           $start = 0;
-          $limit = 5;
+          $limit = 4;
         } else {
-          $limit = $start * 5;
+          $limit = ($start * 5) -1;
           $start = $limit - 4;
         }
         $count = $this->board_m->get_all();
@@ -141,9 +141,9 @@ class Board_c extends CI_Controller {
       $start = $this -> uri -> segment(3, 0);
       if($start < 1){
         $start = 0;
-        $limit = 5;
+        $limit = 4;
       } else {
-        $limit = $start * 5;
+        $limit = ($start * 5) -1;
         $start = $limit - 4;
       }
       $data = array(
