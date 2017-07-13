@@ -58,13 +58,13 @@
             </tr>
           </tfoot>
         </table>
-        <form class="navbar-search pull-left" action="/">
+        <form class="form-group" action="/">
             <select class="form-control" id="searchItem">
               <option value="b_title">제목</option>
               <option value="b_content">내용</option>
               <option value="b_writer">작성자</option>
             </select>
-            <input type="text" class="form-control" placeholder="검색">
+            <input id="searchBox" type="text" class="form-control" placeholder="검색">
             <button id="searchBtn" class="btn btn-default" type="submit">검색</button>
         </form>
         <ul class="pagination">
