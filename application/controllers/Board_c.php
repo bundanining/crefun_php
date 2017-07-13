@@ -13,7 +13,8 @@ class Board_c extends CI_Controller {
         //페이지네이션 게시글 5개씩 출력
         $start = $this -> uri -> segment(2, 1);
         if($start < 1){
-          $start = 1;
+          $start = 0;
+          $limit = 5;
         } else {
           $limit = $start * 5;
           $start = $limit - 4;
@@ -139,7 +140,8 @@ class Board_c extends CI_Controller {
       //페이지네이션 게시글 5개씩 출력
       $start = $this -> uri -> segment(3, 1);
       if($start < 1){
-        $start = 1;
+        $start = 0;
+        $limit = 5;
       } else {
         $limit = $start * 5;
         $start = $limit - 4;
