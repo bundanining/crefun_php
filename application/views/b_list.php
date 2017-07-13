@@ -44,6 +44,22 @@
           </tbody>
           <tfoot>
             <tr>
+              <th>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">글 제목<span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">글제목</a></li>
+                      <li><a href="#">글내용</a></li>
+                      <li><a href="#">작성자</a></li>
+                    </ul>
+                  </div><!-- /btn-group -->
+                  <input type="text" class="form-control" aria-label="...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Search</button>
+                  </span>
+                </div><!-- /input-group -->
+              </th>
               <th colspan="5">
                   <a href="/index.php/board">
                     <span id="list" class="glyphicon glyphicon-menu-hamburger"></span>
@@ -65,7 +81,6 @@
             </tr>
           </tfoot>
         </table>
-
       </div>
     </div>
   </div>
