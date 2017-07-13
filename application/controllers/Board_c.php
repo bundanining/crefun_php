@@ -12,6 +12,7 @@ class Board_c extends CI_Controller {
     public function index() {
         //페이지네이션 게시글 5개씩 출력
         $start = $this -> uri -> segment(2, 1);
+        print_r($start);
         if($start < 1){
           $start = 0;
           $limit = 4;
