@@ -59,13 +59,13 @@
           </tfoot>
         </table>
         <form class="form-group form-inline" method="get" action="/">
-            <select class="form-control" id="searchItem">
+            <select class="form-control" name="searchItem" id="searchItem">
               <option value="b_title">제목</option>
               <option value="b_content">내용</option>
               <option value="b_writer">작성자</option>
             </select>
-            <input id="searchBox" type="text" class="form-control" placeholder="검색">
-            <button id="searchBtn" class="btn btn-default" type="submit">검색</button>
+            <input name="searchBox" id="searchBox" type="text" class="form-control" placeholder="검색">
+            <button class="btn btn-default" type="submit">검색</button>
         </form>
         <ul class="pagination">
           <?php echo $this->pagination->create_links(); ?>
