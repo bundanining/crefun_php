@@ -135,7 +135,35 @@ class Board_c extends CI_Controller {
           echo "false";
         }
     }
+    public function search() {
+      //페이지네이션 게시글 5개씩 출력
+      $start = $this -> uri -> segment(3, 1);
+      if($start < 1){
+        $start = 1;
+      } else {
+        $limit = $start * 5;
+        $start = $limit - 4;
+      }
 
+      $query = $this->board_m->get_list($start,$limit);
+      $count = $query->num_rows();
+
+      $this->load->library('pagination');
+
+      //페이지네이션 config
+      $config['num_links'] = 2; // 쪽선택 몇개씩 보여줄것인지 2이면 1,2,3,4,5까지 보임
+      $config['per_page'] = 5; // 한쪽에 표현될 아이템의 갯수
+      $config['use_page_numbers'] = TRUE; //URI 새그먼트는 페이징하는 아이템들의 시작 인덱스를 사용함. 실제 페이지 번호를 보여주고 싶다면, TRUE
+      $config['base_url'] = '/index.php/board/search'; //페이지네이션이 보여질 url
+      $config['total_rows'] = $count; //전체 행의 개수
+      $res = array(
+          'list' => $query->result(),
+          'pagination' => $this->pagination
+      );
+
+      $this->pagination->initialize($config);
+      $this->load->view('b_list',$res);
+    }
     //하위파일포함 디렉토리 삭제 메소드 2017.07.13
     function rmdir_all($dir) {
       if (!file_exists($dir)) {
