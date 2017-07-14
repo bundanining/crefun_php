@@ -64,8 +64,11 @@
               <option value="content">내용</option>
               <option value="writer">작성자</option>
             </select>
-            <input name="q" id="q" type="text" class="form-control" placeholder="검색">
-            <input type="checkbox" id="c" name="c" value="check">
+            <input name="q" id="q" type="text" class="form-control" placeholder="검색"><input type="checkbox" class="custom-control-input">
+		    
+            <input class="custom-control-input" type="checkbox" id="c" name="c" value="check">
+			<span class="custom-control-indicator"></span>
+		    <span class="custom-control-description">첨부파일 유무</span>
             <button class="btn btn-default" type="submit">검색</button>
         </form>
         <ul class="pagination">
