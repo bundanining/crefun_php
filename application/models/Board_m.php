@@ -24,15 +24,16 @@ class Board_m extends CI_Model {
 
         $sub_sql="SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board INNER JOIN user_data ON board.writer=user_data.user_id";
         $sub_sql2=" LIMIT ".$start.",".$limit;
-        if(strcasecmp($dataSet['condition'],'content') || strcasecmp($dataSet['condition'],'content')){
-          $condition = " WHERE '".$dataSet['condition']."' regexp '".$dataSet['data']."' ";
-        } else if(strcasecmp($dataSet['condition'],'writer')) {
+        if(strcmp($dataSet['condition'],'title') || strcmp($dataSet['condition'],'content')){
+          $condition = " WHERE ".$dataSet['condition']." regexp '".$dataSet['data']."' ";
+        } else if(strcmp($dataSet['condition'],'writer')) {
           $condition = " WHERE user_data.user_name='".$dataSet['data']."'";
         }
-        if(strcmp($tmp,'')){
+        if(strcmp($dataSet['fileChk'],'check'){
+		  $tmp=" AND board.u_file != NULL";
+		  $sql = $sub_sql.$condition.$tmp.$sub_sql2;
+		} else {
           $sql = $sub_sql.$condition.$sub_sql2;
-        } else {
-          $sql = $sub_sql.$condition.$tmp.$sub_sql2;
         }
         return $this->db->query($sql);
     }
