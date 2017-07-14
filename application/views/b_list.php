@@ -34,10 +34,11 @@
             ?>
               <tr>
                 <th><?php echo $row->id; ?></th>
-                <th><a href="/index.php/board/list/<?php echo $row->id;?>"><?php echo $row->title; ?></a></th>
+                <th><a href="/index.php/board/list/<?php echo $row->id;?>" target="_blank"><?php echo $row->title; ?></a></th>
                 <th><?php echo $row->user_name; ?></th>
                 <th><?php echo $row->hit; ?></th>
                 <th><?php echo $row->date; ?></th>
+				<button type="button" id="btn">modal</button>
               </tr>
             <?php
             } ?>
@@ -76,4 +77,20 @@
       </div>
     </div>
   </div>
+  <div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <!-- remote ajax call이 되는영역 -->
+    </div>
+  </div>
+</div>
 </body>
+<script>
+$(function(){
+		$("#btn").click(function(){
+			$('div.modal').modal({
+						  remote : 'test.php'
+					});
+		})
+	});
+</script>

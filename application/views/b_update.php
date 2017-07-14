@@ -32,9 +32,6 @@
 </body>
 <script type="text/javascript">
 
-//var sHTML = "<?php echo $content ?>";
-//editor_object.getById["content"].exec("PASTE_HTML", [sHTML]);
-
 $(function(){
     //전역변수선언
     var editor_object = [];
