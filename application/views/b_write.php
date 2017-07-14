@@ -96,8 +96,8 @@ $(function(){
 
        //폼 submit
        $("#frm").submit();
-    })
-
+    });
+});
 
 	/*
 var oEditors = [];
