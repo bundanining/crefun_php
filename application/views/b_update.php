@@ -14,7 +14,7 @@
             <tbody>
                 <tr>
                   <td>
-					<textarea rows="10" cols="20" id="content" name="content" style="width:200px; height:auto; display:none;"></textarea>
+					<textarea rows="10" cols="20" id="content" name="content" style="width:200px; height:auto; display:none;"><?php echo $content ?></textarea>
 				  </td>
                 </tr>
             </tbody>
@@ -31,6 +31,10 @@
   </div>
 </body>
 <script type="text/javascript">
+
+//var sHTML = "<?php echo $content ?>";
+//editor_object.getById["content"].exec("PASTE_HTML", [sHTML]);
+
 $(function(){
     //전역변수선언
     var editor_object = [];
@@ -47,8 +51,7 @@ $(function(){
             bUseModeChanger : true,
         }
 	});
-	var sHTML = "<?php echo $content ?>";
-	editor_object.getById["content"].exec("PASTE_HTML", [sHTML]);
+	
 	$('#confirm').click(function(){
        //id가 smarteditor인 textarea에 에디터에서 대입
        editor_object.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -59,7 +62,5 @@ $(function(){
        $("#form").submit();
     });
 });
-function pasteHTML() {
-	
-}
+
 </script>
