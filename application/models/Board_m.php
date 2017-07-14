@@ -28,7 +28,7 @@ class Board_m extends CI_Model {
 		  $condition = " WHERE user_data.user_name = '".$dataSet['data']."'";
 		}
         
-		if(strcmp($dataSet['fileChk'],'check')){
+		if(!strcmp($dataSet['fileChk'],'check')){
 			$tmp=" AND board.u_file != NULL";
 			$sql = $sub_sql.$condition.$tmp.$sub_sql2;
 		} else {
