@@ -14,7 +14,7 @@
             <tbody>
                 <tr>
                   <td>
-				    <textarea rows="10" cols="30" id="content" name="content" style="width:650px; height:350px; "></textarea>
+				    <textarea rows="10" cols="20" id="content" name="content" style="width:100%; height:auto; "></textarea>
                   </td>
                 </tr>
             </tbody>
