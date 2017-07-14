@@ -120,13 +120,12 @@ class Board_m extends CI_Model {
     function delete($id) {
         $sql = "DELETE FROM board WHERE id='$id'";
         $res = $this->db->query($sql);
-        $sql2 = "DELETE FROM upload_file WHERE post_id ='$id'";
-        $res2 = $this->db->query($sql2);
-        if($res && $res2){
-          return true;
-        } else {
-          return false;
-        }
+        if($res){
+			return true;
+		}
+		else {
+			return false;
+		}
     }
 
 }
