@@ -14,7 +14,7 @@
             <tbody>
                 <tr>
                   <td>
-					<textarea rows="10" cols="20" id="content" name="content" value="<?php echo $content?>" style="width:200px; height:auto; display:none;"></textarea>
+					<textarea rows="10" cols="20" id="content" name="content" style="width:200px; height:auto; display:none;"></textarea>
 				  </td>
                 </tr>
             </tbody>
@@ -34,7 +34,8 @@
 $(function(){
     //전역변수선언
     var editor_object = [];
-     
+    var sHTML = "<?php echo $content ?>";
+	editor_object.getById["content"].exec("PASTE_HTML", [sHTML]);
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: editor_object,
         elPlaceHolder: "content",
@@ -59,4 +60,7 @@ $(function(){
        $("#form").submit();
     });
 });
+function pasteHTML() {
+	
+}
 </script>
