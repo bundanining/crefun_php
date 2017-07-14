@@ -34,13 +34,7 @@ class Board_m extends CI_Model {
 		} else {
           $sql = $sub_sql.$condition.$sub_sql2;
         }
-		
-        $set = array(
-          'res' => $this->db->query($sql),
-          'query' => $sql
-        );
-        //return $this->db->query($sql);
-        return $set;
+        return $this->db->query($sql);
     }
     function get_search_all($dataSet){
         $sql = "SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board
