@@ -69,7 +69,7 @@ $(document).read(function(){
     return false;
   });
 });*/
-$(function(){
+
       nhn.husky.EZCreator.createInIFrame({
           oAppRef: oEditors,
           elPlaceHolder: "content", //textarea에서 지정한 id와 일치해야 합니다. 
@@ -98,6 +98,19 @@ $(function(){
           oEditors.getById["confirm"].exec("UPDATE_CONTENTS_FIELD", []);
           $("#form").submit();
       });    
-});
 
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+    oAppRef: oEditors,
+    elPlaceHolder: "textarea 아이디",
+    sSkinURI: "/se/SEditorSkin.html",
+    fCreator: "createSEditorInIFrame"
+});
+ 
+function _onSubmit(elClicked){
+    oEditors.getById["textarea 아이디"].exec("UPDATE_IR_FIELD", []);
+    try{
+        elClicked.form.submit();
+    }catch(e){}
+}
 </script>
