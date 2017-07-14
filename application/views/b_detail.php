@@ -5,8 +5,8 @@
       <div class="panel-heading">TITLE: <?php echo $contents->title; ?> </div>
       <div class="panel-body">
         <?php echo $contents->content; ?><br>
-        <?php if(isset($contents->path)) { ?>
-          <img src="http://52.79.255.157/upload/<?php echo $contents->path; ?>" style="max-width: 100%; height: auto;" alt="">
+        <?php if(isset($contents->u_file)) { ?>
+          <img src="http://52.79.255.157/upload/<?php echo $contents->u_file; ?>" style="max-width: 100%; height: auto;" alt="">
         <?php } ?>
       </div>
       <a href="/index.php/board" class="btn btn-primary">목록으로</a>
