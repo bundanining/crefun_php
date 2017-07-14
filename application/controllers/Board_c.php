@@ -154,7 +154,7 @@ class Board_c extends CI_Controller {
       }
       $data['condition'] = $_GET['o'];
       $data['data'] = $_GET['q'];
-
+	  print_r($data);
       $query = $this->board_m->get_search($start,$limit,$data);
       print_r($query['query']);
       $query2 = $this->board_m->get_search_all($data);
