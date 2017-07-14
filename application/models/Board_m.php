@@ -18,24 +18,26 @@ class Board_m extends CI_Model {
     }
     function get_search($start,$limit,$dataSet)
     {
-        $tmp='';
-        if(strcmp($dataSet['fileChk'],'check'))
-          $tmp = " AND board.u_file != NULL";
 
         $sub_sql="SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board INNER JOIN user_data ON board.writer=user_data.user_id";
         $sub_sql2=" LIMIT ".$start.",".$limit;
+
         if(strcmp($dataSet['condition'],'title') || strcmp($dataSet['condition'],'content')){
           $condition = " WHERE ".$dataSet['condition']." regexp '".$dataSet['data']."' ";
         } else if(strcmp($dataSet['condition'],'writer')) {
-          $condition = " WHERE user_data.user_name='".$dataSet['data']."'";
-        }
+
         if(strcmp($dataSet['fileChk'],'check'){
-		  $tmp=" AND board.u_file != NULL";
-		  $sql = $sub_sql.$condition.$tmp.$sub_sql2;
-		} else {
+		$tmp=" AND board.u_file != NULL";
+		$sql = $sub_sql.$condition.$tmp.$sub_sql2;
+	} else {
           $sql = $sub_sql.$condition.$sub_sql2;
         }
-        return $this->db->query($sql);
+        $set = array(
+          'res' => $this->db->query($sql),
+          'query' => $sql
+        );
+        //return $this->db->query($sql);
+        return $set;
     }
     function get_search_all($dataSet){
         $sql = "SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board

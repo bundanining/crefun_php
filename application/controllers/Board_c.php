@@ -156,9 +156,10 @@ class Board_c extends CI_Controller {
       $data['data'] = $_GET['q'];
 
       $query = $this->board_m->get_search($start,$limit,$data);
+      print_r($query['query']);
       $query2 = $this->board_m->get_search_all($data);
       $count = $query2->num_rows();
-
+      //print_r($query->result());
       $this->load->library('pagination');
       //페이지네이션 config
       $config['num_links'] = 2; // 쪽선택 몇개씩 보여줄것인지 2이면 1,2,3,4,5까지 보임
@@ -168,7 +169,7 @@ class Board_c extends CI_Controller {
       $config['total_rows'] = $count; //전체 행의 개수
       $this->pagination->initialize($config);
       $res = array(
-          'list' => $query->result(),
+          'list' => $query['res']->result(),
           'pagination' => $this->pagination
       );
 
