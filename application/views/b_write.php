@@ -99,18 +99,4 @@ $(document).read(function(){
           $("#form").submit();
       });    
 
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-    oAppRef: oEditors,
-    elPlaceHolder: "textarea 아이디",
-    sSkinURI: "/se/SEditorSkin.html",
-    fCreator: "createSEditorInIFrame"
-});
- 
-function _onSubmit(elClicked){
-    oEditors.getById["textarea 아이디"].exec("UPDATE_IR_FIELD", []);
-    try{
-        elClicked.form.submit();
-    }catch(e){}
-}
 </script>
