@@ -9,7 +9,7 @@
 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script type="text/javascript" src="./smartediter/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://52.79.255.157/smartediter/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
