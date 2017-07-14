@@ -25,13 +25,16 @@ class Board_m extends CI_Model {
         if(strcmp($dataSet['condition'],'title') || strcmp($dataSet['condition'],'content')){
           $condition = " WHERE ".$dataSet['condition']." regexp '".$dataSet['data']."' ";
         } else if(strcmp($dataSet['condition'],'writer')) {
-
-        if(strcmp($dataSet['fileChk'],'check'){
-		$tmp=" AND board.u_file != NULL";
-		$sql = $sub_sql.$condition.$tmp.$sub_sql2;
-	} else {
+		  $condition = " WHERE user_data.user_name = '".$dataSet['data']."'";
+		}
+        
+		if(strcmp($dataSet['fileChk'],'check'){
+			$tmp=" AND board.u_file != NULL";
+			$sql = $sub_sql.$condition.$tmp.$sub_sql2;
+		} else {
           $sql = $sub_sql.$condition.$sub_sql2;
         }
+		
         $set = array(
           'res' => $this->db->query($sql),
           'query' => $sql
