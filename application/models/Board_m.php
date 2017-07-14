@@ -29,7 +29,7 @@ class Board_m extends CI_Model {
 		}
         
 		if(!strcmp($dataSet['fileChk'],'check')){
-			$tmp=" AND board.u_file != NULL";
+			$tmp=" AND board.u_file is not NULL";
 			$sql = $sub_sql.$condition.$tmp.$sub_sql2;
 		} else {
           $sql = $sub_sql.$condition.$sub_sql2;
