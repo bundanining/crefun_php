@@ -88,14 +88,14 @@ $(function(){
             bUseModeChanger : true,
         }
 	
-	$("#confirm").click(function(){
+	$('#confirm').click(function(){
        //id가 smarteditor인 textarea에 에디터에서 대입
        editor_object.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
          
        // 이부분에 에디터 validation 검증
 
        //폼 submit
-       $("#frm").submit();
+       $("#form").submit();
     });
 });
 
