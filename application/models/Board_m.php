@@ -22,9 +22,9 @@ class Board_m extends CI_Model {
         $sub_sql="SELECT board.id, board.title, board.hit, user_data.user_name, board.date FROM board INNER JOIN user_data ON board.writer=user_data.user_id";
         $sub_sql2=" LIMIT ".$start.",".$limit;
 
-        if(strcmp($dataSet['condition'],'title') || strcmp($dataSet['condition'],'content')){
+        if(!strcmp($dataSet['condition'],'title') || !strcmp($dataSet['condition'],'content')){
           $condition = " WHERE ".$dataSet['condition']." regexp '".$dataSet['data']."' ";
-        } else if(strcmp($dataSet['condition'],'writer')) {
+        } else if(!strcmp($dataSet['condition'],'writer')) {
 		  $condition = " WHERE user_data.user_name = '".$dataSet['data']."'";
 		}
         
