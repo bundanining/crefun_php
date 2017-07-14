@@ -34,8 +34,6 @@
 $(function(){
     //전역변수선언
     var editor_object = [];
-    var sHTML = "<?php echo $content ?>";
-	editor_object.getById["content"].exec("PASTE_HTML", [sHTML]);
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: editor_object,
         elPlaceHolder: "content",
@@ -49,7 +47,8 @@ $(function(){
             bUseModeChanger : true,
         }
 	});
-	
+	var sHTML = "<?php echo $content ?>";
+	editor_object.getById["content"].exec("PASTE_HTML", [sHTML]);
 	$('#confirm').click(function(){
        //id가 smarteditor인 textarea에 에디터에서 대입
        editor_object.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
