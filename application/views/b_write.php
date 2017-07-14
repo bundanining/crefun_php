@@ -14,7 +14,7 @@
             <tbody>
                 <tr>
                   <td>
-				    <textarea rows="10" cols="20" id="content" name="content" style="width:300px; height:auto; "></textarea>
+				    <textarea rows="10" cols="20" id="content" name="content" style="width:200px; height:auto;"></textarea>
                   </td>
                 </tr>
             </tbody>
@@ -32,6 +32,7 @@
   </div>
 </body>
 <script type="text/javascript">
+/*
 function check() {
     if($('#title').val() == "" || $('#content').val()== ""){
       alert('모든 내용을 채워주세요!!');
@@ -39,7 +40,7 @@ function check() {
     }else {
       return true;
     }
-}
+}*/
 /*
 $(document).read(function(){
   $('#form').submit(function(e){
@@ -70,19 +71,41 @@ $(document).read(function(){
   });
 });*/
 
+$(function(){
+    //전역변수선언
+    var editor_object = [];
+     
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: editor_object,
+        elPlaceHolder: "content",
+        sSkinURI: "/smartediter/SmartEditor2Skin.html",
+        htParams : {
+            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseToolbar : true,            
+            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,    
+            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,
+        }
+	
+	$("#confirm").click(function(){
+       //id가 smarteditor인 textarea에 에디터에서 대입
+       editor_object.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+         
+       // 이부분에 에디터 validation 검증
 
+       //폼 submit
+       $("#frm").submit();
+    })
+
+
+	/*
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
     oAppRef: oEditors,
     elPlaceHolder: "content",
     sSkinURI: "/smartediter/SmartEditor2Skin.html",
     fCreator: "createSEditorInIFrame"
-});
- 
-function _onSubmit(elClicked){
-    oEditors.getById["content"].exec("UPDATE_IR_FIELD", []);
-    try{
-        elClicked.form.submit();
-    }catch(e){}
-}
+});*/
+
 </script>
