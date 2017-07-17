@@ -32,7 +32,7 @@
   </div>
 </body>
 <script type="text/javascript">
-/*
+
 function check() {
     if($('#title').val() == "" || $('#content').val()== ""){
       alert('모든 내용을 채워주세요!!');
@@ -40,7 +40,7 @@ function check() {
     }else {
       return true;
     }
-}*/
+}
 /*
 $(document).read(function(){
   $('#form').submit(function(e){
